@@ -9,7 +9,7 @@ const MyEquipmenCard = ({ card, openModal }) => {
   
 
   return (
-    <div className="break-inside-avoid w-full">
+    <div className="break-inside-avoid w-full mb-3">
       <div className="card bg-base-100 shadow-md rounded-md border h-full flex flex-col justify-between">
         <figure className=" w-full overflow-hidden">
           {card?.image && (
