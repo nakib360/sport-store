@@ -9,11 +9,13 @@ import MyEquipment from "../Pages/MyEquipment";
 import CategoryItems from "../Components/CategoryItems";
 import SpetialRout from "./SpetialRout";
 import UpdateEquipment from "../Pages/UpdateEquipment";
+import ErrorPage from "../Pages/ErrorPage";
 
 const rout = createBrowserRouter([
   {
     path: "/",
     element: <MainPage />,
+    errorElement: <ErrorPage/>,
     children: [
       {
         index: true,
@@ -80,6 +82,10 @@ const rout = createBrowserRouter([
         path: "/signin",
         element: <Register />,
       },
+      {
+        path: "/error",
+        element: <ErrorPage/>
+      }
     ],
   },
 ]);
