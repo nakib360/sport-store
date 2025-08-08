@@ -4,6 +4,7 @@ import MyEquipmenCard from "../Components/MyEquipmenCard";
 import EmptyProduct from "../Components/EmptyProduct";
 import { ImCross } from "react-icons/im";
 import { Slide, toast } from "react-toastify";
+import Loading from "../Components/Loading";
 
 const MyEquipment = () => {
   const [data, setData] = useState([]);
@@ -16,13 +17,13 @@ const MyEquipment = () => {
     document.getElementById("delete_modal").showModal();
   };
   useEffect(() => {
-    fetch(`https://sports-equipment-server-ten.vercel.app/allItems/author/${user?.email}`)
+    fetch(`https://sport-store-server-bxc4.onrender.com/allItems/author/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [user?.email]);
 
   const handleDelete = (id) => {
-    fetch(`https://sports-equipment-server-ten.vercel.app/allItems/id/${id}`, {
+    fetch(`https://sport-store-server-bxc4.onrender.com/allItems/id/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -44,6 +45,11 @@ const MyEquipment = () => {
         }
       });
   };
+
+  if(!data){
+    return <Loading/>
+  }
+
   return (
     <div
       className={

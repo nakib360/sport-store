@@ -81,7 +81,7 @@ const AddEquipmentForm = () => {
       author: user?.email,
     };
 
-    fetch("https://sports-equipment-server-ten.vercel.app/allItems", {
+    fetch("https://sport-store-server-bxc4.onrender.com/allItems", {
       method: "POST",
       headers: {
         "content-type": "application/json",

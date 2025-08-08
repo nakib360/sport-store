@@ -7,7 +7,7 @@ const Footer = () => {
         className="bg-base-300 text-base-content p-10 font-bitcount"
         data-theme="coffee"
       >
-        <p className="text-5xl font-bold text-center">Sport Shop</p>
+        <p className="text-5xl font-bold text-center">Sport&nbsp;Shop</p>
         <p className="text-xl text-center mb-8">We make export</p>
 
         <div className="footer sm:footer-horizontal">

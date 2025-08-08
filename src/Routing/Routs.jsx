@@ -32,7 +32,7 @@ const rout = createBrowserRouter([
             element: <CategoryItems />,
             loader: ({ params }) =>
               fetch(
-                `https://sports-equipment-server-ten.vercel.app/allItems/category/${params.category}`
+                `https://sport-store-server-bxc4.onrender.com/allItems/category/${params.category}`
               ),
           },
         ],
@@ -44,7 +44,7 @@ const rout = createBrowserRouter([
             <AllEquipments />
           </SpetialRout>
         ),
-        loader: () => fetch("https://sports-equipment-server-ten.vercel.app/allItems"),
+        loader: () => fetch("https://sport-store-server-bxc4.onrender.com/allItems"),
       },
       {
         path: "/my-equipment",
@@ -70,7 +70,7 @@ const rout = createBrowserRouter([
           </SpetialRout>
         ),
         loader: ({ params }) =>
-          fetch(`https://sports-equipment-server-ten.vercel.app/allItems/id/${params.id}`),
+          fetch(`https://sport-store-server-bxc4.onrender.com/allItems/id/${params.id}`),
       },
       {
         path: "/login",

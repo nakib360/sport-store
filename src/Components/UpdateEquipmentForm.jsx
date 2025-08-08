@@ -89,7 +89,7 @@ const UpdateEquipmentForm = () => {
 
     console.log("Updated Equipment:", newEquipment);
 
-    fetch(`https://sports-equipment-server-ten.vercel.app/allItems/id/${loadedData?._id}`, {
+    fetch(`https://sport-store-server-bxc4.onrender.com/allItems/id/${loadedData?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

@@ -1,8 +1,13 @@
 import { useLoaderData } from "react-router";
 import AllItems from "../Components/AllItems";
+import Loading from "../Components/Loading";
 
 const AllEquipments = () => {
   const loadedData = useLoaderData();
+
+  if(!loadedData){
+    return <Loading/>
+  }
 
   return (
     <div
