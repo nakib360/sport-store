@@ -89,11 +89,11 @@ const AddEquipmentForm = () => {
       body: JSON.stringify(newEquipment),
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         form.reset();
         setSelectedCategory("Select Category");
         setSelectedBrand("Select Brand");
-        console.log(data);
+        // console.log(data);
         toast.success("equipment is successfully added.", {
           position: "top-right",
           autoClose: 2000,

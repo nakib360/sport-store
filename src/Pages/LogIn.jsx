@@ -21,8 +21,8 @@ const LogIn = () => {
     const password = form.pass.value;
   
     logInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        // console.log(result.user);
         toast.success(`${user?.name || "User"} was successfully logged in.`, {
           position: "top-right",
           autoClose: 2000,
@@ -43,7 +43,7 @@ const LogIn = () => {
         }, 1000);
       })
       .catch((err) => {
-        console.log(err.message);
+        // console.log(err.message);
   
         if (err.message.includes("auth/invalid-credential")) {
           toast.error("Please provide a valid email and password", {
@@ -76,25 +76,25 @@ const LogIn = () => {
 
   const googleLogIn = () => {
     signinWithGoogle()
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        // console.log(result);
         navigate(location.state ? location.state : "/");
         window.location.reload();
       })
-      .catch((err) => {
-        console.log(err.code);
+      .catch(() => {
+        // console.log(err.code);
       });
   };
 
   const gitHubLogIn = () => {
     signInWithGithub()
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        // console.log(result);
         navigate(location.state ? location.state : "/");
         window.location.reload();
       })
-      .catch((err) => {
-        console.log(err.code);
+      .catch(() => {
+        // console.log(err.code);
       });
   };
 

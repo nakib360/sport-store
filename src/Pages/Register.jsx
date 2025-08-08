@@ -46,16 +46,16 @@ const Register = () => {
             return result.user.reload();
           })
           .then(() => {
-            console.log("Profile updated!", result.user);
+            // console.log("Profile updated!", result.user);
             navigate("/");
             window.location.reload();
           })
-          .catch((err) => {
-            console.log("Update error:", err.code);
+          .catch(() => {
+            // console.log("Update error:", err.code);
           });
       })
-      .catch((err) => {
-        console.log("Create error:", err.code);
+      .catch(() => {
+        // console.log("Create error:", err.code);
       });
   };
 

@@ -87,7 +87,7 @@ const UpdateEquipmentForm = () => {
       author: user?.email,
     };
 
-    console.log("Updated Equipment:", newEquipment);
+    // console.log("Updated Equipment:", newEquipment);
 
     fetch(`https://sport-store-server-bxc4.onrender.com/allItems/id/${loadedData?._id}`, {
       method: "PUT",
@@ -98,7 +98,7 @@ const UpdateEquipmentForm = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data?.modifiedCount > 0) {
           toast.success("Your Equipment is successfully updated!!!", {
             position: "top-right",
