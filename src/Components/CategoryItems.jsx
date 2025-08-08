@@ -1,9 +1,16 @@
 import { useLoaderData } from "react-router";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import Loading from "./Loading";
 
 const CategoryItems = () => {
   const loadedData = useLoaderData();
+
+  if (!Array.isArray(loadedData)) {
+    return (
+      <Loading/>
+    );
+  }
 
   return (
     <div className="columns-1 sm:columns-2 md:columns-3 p-4 space-y-4">
@@ -21,7 +28,9 @@ const CategoryItems = () => {
               </figure>
 
               <div className="card-body flex flex-col gap-3">
-                <h2 className="card-title text-lg font-semibold">{card.name}</h2>
+                <h2 className="card-title text-lg font-semibold">
+                  {card.name}
+                </h2>
 
                 <div className="flex justify-between items-center text-sm">
                   <p className="font-medium">Price: ${card?.price}</p>
@@ -45,7 +54,9 @@ const CategoryItems = () => {
                 <p className="text-sm text-gray-600">{card.description}</p>
 
                 <div className="flex flex-wrap gap-2 text-xs">
-                  <div className="badge badge-outline badge-primary">{card?.brand}</div>
+                  <div className="badge badge-outline badge-primary">
+                    {card?.brand}
+                  </div>
                   <div className="badge badge-outline badge-secondary">
                     {card?.stock} in stock
                   </div>
