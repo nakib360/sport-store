@@ -100,7 +100,7 @@ const LogIn = () => {
 
   return (
     <div
-      className="min-h-screen flex justify-center flex-col items-center gap-10 font-bitcount py-5"
+      className="min-h-screen flex justify-center flex-col items-center gap-10 font-bitcount px-3 md:px-0 py-5"
       data-theme="coffee"
     >
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border-1 rounded-none border-orange-300">

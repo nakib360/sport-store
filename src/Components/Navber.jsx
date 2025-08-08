@@ -35,7 +35,7 @@ const Navber = () => {
               <TbMenu2 />
             </label>
           </div>
-          <a className="text-2xl font-bold ">Sport Shop</a>
+          <a className="text-2xl font-bold ">Sport&nbsp;Shop</a>
         </div>
 
         {/* Center: Nav links (lg and up only) */}
@@ -93,7 +93,7 @@ const Navber = () => {
                 <NavLink
                   className={({ isActive }) => (isActive ? "bg-orange-300/10 text-orange-300" : "")}
                   to={item.location}
-                  onClick={closeDrawer} // ক্লিক করলে drawer বন্ধ হবে
+                  onClick={closeDrawer} 
                 >
                   {item.name}
                 </NavLink>
