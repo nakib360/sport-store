@@ -1,11 +1,15 @@
+import { useContext } from "react";
 import { BiCopyright } from "react-icons/bi";
+import AuthContext from "../AuthProvider/AuthContext";
 
 const Footer = () => {
+  const {theme} = useContext(AuthContext);
+
   return (
     <div>
       <footer
         className="bg-base-300 text-base-content p-10 font-bitcount"
-        data-theme="coffee"
+        data-theme={theme}
       >
         <p className="text-5xl font-bold text-center">Sport&nbsp;Shop</p>
         <p className="text-xl text-center mb-8">We make export</p>

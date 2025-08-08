@@ -8,7 +8,7 @@ import Loading from "../Components/Loading";
 
 const MyEquipment = () => {
   const [data, setData] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { user, theme } = useContext(AuthContext);
 
   const [deleteId, setDeleteId] = useState(null);
 
@@ -57,7 +57,7 @@ const MyEquipment = () => {
           ? "min-h-screen font-bitcount columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3 p-3"
           : "min-h-screen font-bitcount"
       }
-      data-theme="coffee"
+      data-theme={theme}
     >
       {data.length === 0 ? (
         <EmptyProduct />

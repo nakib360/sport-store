@@ -10,7 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(false); // Track password validity
 
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, theme } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSignIn = (e) => {
@@ -62,7 +62,7 @@ const Register = () => {
   return (
     <div
       className="min-h-screen flex justify-center flex-col items-center gap-10 font-bitcount px-3 md:px-0 py-5"
-      data-theme="coffee"
+      data-theme={theme}
     >
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border-1 rounded-none border-orange-300">
         <div className="card-body">

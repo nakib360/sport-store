@@ -10,7 +10,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={rout} />
-      <ToastContainer className="font-bitcount" data-theme="coffee"/>
+      <ToastContainer className="font-bitcount"/>
     </AuthProvider>
   </StrictMode>
 );

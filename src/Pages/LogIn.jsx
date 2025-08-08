@@ -8,7 +8,7 @@ import { Slide, toast } from "react-toastify";
 
 const LogIn = () => {
   const [show, setShow] = useState(false);
-  const { logInUser, signinWithGoogle, signInWithGithub, user } =
+  const { logInUser, signinWithGoogle, signInWithGithub, user, theme } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -101,7 +101,7 @@ const LogIn = () => {
   return (
     <div
       className="min-h-screen flex justify-center flex-col items-center gap-10 font-bitcount px-3 md:px-0 py-5"
-      data-theme="coffee"
+      data-theme={theme}
     >
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border-1 rounded-none border-orange-300">
         <div className="card-body">

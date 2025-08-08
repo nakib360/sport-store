@@ -1,16 +1,27 @@
 import { NavLink } from "react-router";
 import { TbMenu2 } from "react-icons/tb";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../AuthProvider/AuthContext";
+import { BiMoon, BiSun } from "react-icons/bi";
 
 const Navber = () => {
-  const { user, logoutUser } = useContext(AuthContext);
+  const { user, logoutUser, setTheme, theme } = useContext(AuthContext);
+  const [animating, setAnimating] = useState(false);
+
+  const themeControler = () => {
+    setAnimating(true);
+    setTimeout(() => {
+      setTheme(theme === "coffee" ? "autumn" : "coffee");
+      setAnimating(false);
+    }, 150);
+  };
+
   const nav = [
     { location: "/Home", name: "Home" },
     { location: "/sports-equipment", name: "All Sport Equipments" },
     ...(user
       ? [
-        { location: "/my-equipment", name: "My Equipment" },
+          { location: "/my-equipment", name: "My Equipment" },
           { location: "/add-equipment", name: "Add Equipment" },
         ]
       : []),
@@ -26,7 +37,7 @@ const Navber = () => {
       {/* Navbar */}
       <div
         className="navbar fixed z-50 top-0 left-0 right-0 bg-base-100 shadow-sm font-bitcount md:px-5"
-        data-theme="coffee"
+        data-theme={theme}
       >
         {/* Left: Mobile Drawer Toggle */}
         <div className="navbar-start">
@@ -56,8 +67,35 @@ const Navber = () => {
           </ul>
         </div>
 
+
         {/* Right: User info or Login */}
         <div className="navbar-end">
+        <div
+          className="border-2 rounded-full mr-4 cursor-pointer
+             transition-all duration-300 ease-in-out
+             hover:scale-110"
+          onClick={themeControler}
+        >
+          {theme === "coffee" ? (
+            <BiSun
+              className={`text-3xl text-yellow-500 transform transition-all duration-300 ease-in-out
+              ${
+                animating
+                  ? "opacity-0 scale-50 rotate-90"
+                  : "opacity-100 scale-100 rotate-0"
+              }`}
+            />
+          ) : (
+            <BiMoon
+              className={`text-3xl transform transition-all duration-300 ease-in-out
+              ${
+                animating
+                  ? "opacity-0 scale-50 -rotate-90"
+                  : "opacity-100 scale-100 rotate-0"
+              }`}
+            />
+          )}
+        </div>
           {user?.email ? (
             <div className="dropdown dropdown-end">
               <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -83,7 +121,7 @@ const Navber = () => {
       </div>
 
       {/* Drawer for Mobile */}
-      <div className="drawer lg:hidden z-50" data-theme="coffee">
+      <div className="drawer lg:hidden z-50 font-bitcount" data-theme={theme}>
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
@@ -91,9 +129,11 @@ const Navber = () => {
             {nav.map((item, idx) => (
               <li key={idx}>
                 <NavLink
-                  className={({ isActive }) => (isActive ? "bg-orange-300/10 text-orange-300" : "")}
+                  className={({ isActive }) =>
+                    isActive ? "bg-orange-300/10 text-orange-300" : ""
+                  }
                   to={item.location}
-                  onClick={closeDrawer} 
+                  onClick={closeDrawer}
                 >
                   {item.name}
                 </NavLink>
@@ -107,3 +147,5 @@ const Navber = () => {
 };
 
 export default Navber;
+
+// autumn
