@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import { IoEye } from "react-icons/io5";
-import { IoEyeOff } from "react-icons/io5";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import AuthContext from "../AuthProvider/AuthContext";
 import { GrGithub, GrGoogle } from "react-icons/gr";
@@ -8,94 +7,87 @@ import { Slide, toast } from "react-toastify";
 
 const LogIn = () => {
   const [show, setShow] = useState(false);
-  const { logInUser, signinWithGoogle, signInWithGithub, user, theme } =
+  const { logInUser, signinWithGoogle, /*signInWithGithub,*/ theme } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
+  // reusable toast options
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Slide,
+  };
+
   const handleLogIn = (e) => {
     e.preventDefault();
-  
     const form = e.target;
     const email = form.email.value;
     const password = form.pass.value;
-  
+
     logInUser(email, password)
-      .then(() => {
-        // console.log(result.user);
-        toast.success(`${user?.name || "User"} was successfully logged in.`, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          transition: Slide,
-        });
-  
+      .then((result) => {
+        const currentUser = result.user;
+        toast.success(
+          `${currentUser?.displayName || "User"} was successfully logged in.`,
+          toastOptions
+        );
         navigate(location.state ? location.state : "/");
-  
-        // Delay reload slightly to allow toast to show
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
       })
       .catch((err) => {
-        // console.log(err.message);
-  
+        const errCode = err.code.replace("auth/", "").replace(/-/g, " ");
         if (err.message.includes("auth/invalid-credential")) {
-          toast.error("Please provide a valid email and password", {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Slide,
-          });
+          toast.error(
+            "Please provide a valid email and password",
+            toastOptions
+          );
         } else if (err.message.includes("auth/too-many-requests")) {
-          toast.error("Too many attempts. Please try again later.", {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Slide,
-          });
+          toast.error(
+            "Too many attempts. Please try again later.",
+            toastOptions
+          );
+        } else {
+          toast.error(errCode, toastOptions);
         }
       });
   };
-  
 
   const googleLogIn = () => {
     signinWithGoogle()
-      .then(() => {
-        // console.log(result);
+      .then((result) => {
+        const currentUser = result.user;
+        toast.success(
+          `${currentUser?.displayName || "User"} was successfully logged in.`,
+          toastOptions
+        );
         navigate(location.state ? location.state : "/");
-        window.location.reload();
       })
-      .catch(() => {
-        // console.log(err.code);
+      .catch((err) => {
+        const errCode = err.code.replace("auth/", "").replace(/-/g, " ");
+        toast.error(errCode, toastOptions);
       });
   };
 
   const gitHubLogIn = () => {
-    signInWithGithub()
-      .then(() => {
-        // console.log(result);
-        navigate(location.state ? location.state : "/");
-        window.location.reload();
-      })
-      .catch(() => {
-        // console.log(err.code);
-      });
+    // signInWithGithub()
+    //   .then((result) => {
+    //     const currentUser = result.user;
+    //     toast.success(
+    //       `${currentUser?.displayName || "User"} was successfully logged in.`,
+    //       toastOptions
+    //     );
+    //     navigate(location.state ? location.state : "/");
+    //   })
+    //   .catch((err) => {
+    //     const errCode = err.code.replace("auth/", "").replace(/-/g, " ");
+    //     toast.error(errCode, toastOptions);
+    //   });
   };
 
   return (
@@ -103,7 +95,7 @@ const LogIn = () => {
       className="min-h-screen flex justify-center flex-col items-center gap-10 font-bitcount px-3 md:px-0 py-5"
       data-theme={theme}
     >
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border-1 rounded-none border-orange-300">
+      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border-1 rounded-none">
         <div className="card-body">
           <form onSubmit={handleLogIn} className="fieldset">
             <label className="label">Email</label>
@@ -112,6 +104,7 @@ const LogIn = () => {
               className="focus:outline-none text-sm p-2 border-b-1 "
               placeholder="Email"
               name="email"
+              required
             />
             <label className="label">Password</label>
             <div className="relative w-full">
@@ -120,16 +113,16 @@ const LogIn = () => {
                 placeholder="Password"
                 className="focus:outline-none text-sm p-2 border-b w-full pr-10"
                 name="pass"
+                required
               />
               <button
                 type="button"
                 onClick={() => setShow(!show)}
-                className="absolute right-2 top-2 text-xl text-orange-200"
+                className="absolute right-2 top-2 text-xl"
               >
                 {show ? <IoEyeOff /> : <IoEye />}
               </button>
-            </div>{" "}
-            
+            </div>
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
@@ -140,7 +133,7 @@ const LogIn = () => {
                 register
               </NavLink>{" "}
               or login with <span className="font-bold">Google</span> or{" "}
-              <span className="font-bold">GitHub</span> bellow{" "}
+              <span className="font-bold">GitHub</span> below
             </p>
           </form>
         </div>
@@ -148,14 +141,14 @@ const LogIn = () => {
       <div className="w-full max-w-sm space-y-2">
         <button
           onClick={googleLogIn}
-          className="btn btn-outline rounded-none w-full flex justify-center items-center "
+          className="btn btn-outline rounded-none w-full flex justify-center items-center gap-2"
         >
           <GrGoogle />
           <p>Log in with Google</p>
         </button>
         <button
           onClick={gitHubLogIn}
-          className="btn btn-outline rounded-none w-full"
+          className="btn btn-outline rounded-none w-full flex justify-center items-center gap-2"
         >
           <GrGithub />
           Log in with GitHub

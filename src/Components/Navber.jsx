@@ -11,7 +11,7 @@ const Navber = () => {
   const themeControler = () => {
     setAnimating(true);
     setTimeout(() => {
-      setTheme(theme === "coffee" ? "autumn" : "coffee");
+      setTheme(theme === "coffee" ? "nord" : "coffee");
       setAnimating(false);
     }, 150);
   };
@@ -26,6 +26,8 @@ const Navber = () => {
         ]
       : []),
   ];
+
+  
 
   const closeDrawer = () => {
     const drawerCheckbox = document.getElementById("my-drawer");
@@ -78,7 +80,7 @@ const Navber = () => {
         >
           {theme === "coffee" ? (
             <BiSun
-              className={`text-3xl text-yellow-500 transform transition-all duration-300 ease-in-out
+              className={`text-4xl text-yellow-500 transform transition-all duration-300 ease-in-out
               ${
                 animating
                   ? "opacity-0 scale-50 rotate-90"
@@ -87,7 +89,7 @@ const Navber = () => {
             />
           ) : (
             <BiMoon
-              className={`text-3xl transform transition-all duration-300 ease-in-out
+              className={`text-4xl transform transition-all duration-300 ease-in-out
               ${
                 animating
                   ? "opacity-0 scale-50 -rotate-90"
@@ -100,7 +102,7 @@ const Navber = () => {
             <div className="dropdown dropdown-end">
               <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-8 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-base-100">
-                  <img src={user?.photoURL} alt="User Avatar" />
+                  <img src={user?.photoURL} alt={user?.displayName} />
                 </div>
               </div>
               <ul

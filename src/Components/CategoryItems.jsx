@@ -6,7 +6,7 @@ import Loading from "./Loading";
 const CategoryItems = () => {
   const loadedData = useLoaderData();
 
-  if (!Array.isArray(loadedData)) {
+  if (!loadedData) {
     return (
       <Loading/>
     );

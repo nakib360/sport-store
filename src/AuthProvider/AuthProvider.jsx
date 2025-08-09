@@ -31,12 +31,18 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, gitHubProvider);
     }
 
-    const updateUser = (displayName, photoURL) => {
+    const updateUser = async(displayName, photoURL) => {
         setLoading(true)
-        return updateProfile(auth.currentUser, {
-            displayName: displayName,
-            photoURL: photoURL
-        })
+        try{
+            await updateProfile(auth.currentUser, {
+                displayName: displayName,
+                photoURL: photoURL
+            })
+            await auth.currentUser.reload();
+            setUser(auth.currentUser);
+        }finally{
+            setLoading(false)
+        }
     }
 
     const logoutUser = () => {
