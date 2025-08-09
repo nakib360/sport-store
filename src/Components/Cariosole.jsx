@@ -19,10 +19,14 @@ const Cariosole = () => {
   const goToSlide = (index) => {
     setCurrent(index);
   };
+
   return (
     <div className="p-5">
       {/* Carousel container */}
       <div className="w-full h-[200px] md:h-[500px] rounded-2xl overflow-hidden relative">
+        {/* Black transparent overlay over whole carousel */}
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
+
         {images.map((img, index) => (
           <img
             key={index}
@@ -31,17 +35,18 @@ const Cariosole = () => {
             className={`absolute w-full h-full object-cover transition-opacity duration-500 ${
               current === index ? "opacity-100" : "opacity-0"
             }`}
+            style={{ zIndex: 5 }} // below overlay and text
           />
         ))}
 
         {/* Centered overlay text */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h2 className="text-white  bg-black/40 px-4 py-2 rounded">
-            <p className="text-2xl md:text-4xl font-semibold">
+        <div className="absolute inset-0 flex items-center justify-center z-20 px-4">
+          <div>
+            <p className="text-white text-2xl md:text-4xl font-semibold">
               Welcome to Sport Shop
             </p>
-            <p className="text-center">We make export</p>
-          </h2>
+            <p className="text-white text-center">We make export</p>
+          </div>
         </div>
       </div>
 
